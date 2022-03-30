@@ -1,5 +1,3 @@
-# TriviaAppRk22ApplicationV2.0
-
 # Trivia application TDD
 For this version, I've used the Test Driven Development approach (test, code, design), so make sure to check the tests folder.
 
