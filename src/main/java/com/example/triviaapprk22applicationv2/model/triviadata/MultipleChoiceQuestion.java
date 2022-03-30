@@ -1,10 +1,11 @@
-package com.example.triviaapprk22applicationv2.model.triviadata.multiplechoicequestion;
+package com.example.triviaapprk22applicationv2.model.triviadata;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Arrays;
 
+// TODO: Remove submitted answer and add it to a form instead
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MultipleChoiceQuestion {
     private String category;

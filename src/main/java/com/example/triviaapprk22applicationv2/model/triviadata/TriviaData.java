@@ -1,6 +1,5 @@
 package com.example.triviaapprk22applicationv2.model.triviadata;
 
-import com.example.triviaapprk22applicationv2.model.triviadata.multiplechoicequestion.MultipleChoiceQuestion;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 

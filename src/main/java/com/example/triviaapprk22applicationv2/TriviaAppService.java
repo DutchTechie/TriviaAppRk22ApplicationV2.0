@@ -2,7 +2,7 @@ package com.example.triviaapprk22applicationv2;
 
 import com.example.triviaapprk22applicationv2.exceptions.ResourceUnavailableException;
 import com.example.triviaapprk22applicationv2.model.triviadata.TriviaData;
-import com.example.triviaapprk22applicationv2.model.triviadata.multiplechoicequestion.MultipleChoiceQuestion;
+import com.example.triviaapprk22applicationv2.model.triviadata.MultipleChoiceQuestion;
 import org.springframework.stereotype.Service;
 
 @Service
