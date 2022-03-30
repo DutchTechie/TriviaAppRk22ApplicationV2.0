@@ -1,7 +1,9 @@
 package com.example.triviaapprk22applicationv2;
 
+import com.example.triviaapprk22applicationv2.exceptions.ResourceUnavailableException;
 import com.example.triviaapprk22applicationv2.model.triviadata.TriviaData;
 import com.example.triviaapprk22applicationv2.model.triviadata.multiplechoicequestion.MultipleChoiceQuestion;
+import com.example.triviaapprk22applicationv2.stubs.Stubs;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -11,45 +13,24 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 class TriviaAppRepositoryTest {
-    private static final String DUMMY_URI = "www.dummyuri.com";
+    private static final String DUMMY_URI = "";
     private RestTemplate template;
     private TriviaAppRepository repositoryUnderTest;
     private TriviaData dummyTriviaData;
+    private static final int AMOUNT_OF_QUESTIONS = 3;
+    private static final int NUMBER_OF_INCORRECT_ANSWERS_FOR_EACH_QUESTION = 4;
 
     @BeforeEach
     void setup() {
-        MultipleChoiceQuestion[] dummyMultipleChoiceQuestions = new MultipleChoiceQuestion[3];
-        for (int i = 1; i < dummyMultipleChoiceQuestions.length + 1 ; i++) {
-            dummyMultipleChoiceQuestions[i - 1] = createDummyMultipleChoiceQuestion(i);
-        }
-        this.dummyTriviaData = createDummyTriviaDataObject(dummyMultipleChoiceQuestions);
+        MultipleChoiceQuestion[] dummyMultipleChoiceQuestions = Stubs.createDummyMultipleChoiceQuestions(AMOUNT_OF_QUESTIONS, NUMBER_OF_INCORRECT_ANSWERS_FOR_EACH_QUESTION);
+        this.dummyTriviaData = Stubs.createDummyTriviaDataObject(dummyMultipleChoiceQuestions);
         this.template = Mockito.mock(RestTemplate.class);
-        this.repositoryUnderTest = new TriviaAppRepository(template, TriviaData.class);
+        this.repositoryUnderTest = new TriviaAppRepository(template);
     }
 
     @Test
     void testRepositoryFetchesAnObject() {
         when(template.getForObject(DUMMY_URI, TriviaData.class)).thenReturn(dummyTriviaData);
         assertNotNull(repositoryUnderTest.fetch(DUMMY_URI));
-    }
-
-    private TriviaData createDummyTriviaDataObject(MultipleChoiceQuestion[] multipleChoiceQuestionsArray) {
-        TriviaData dummyTriviaDataObject = new TriviaData();
-        dummyTriviaDataObject.setMultipleChoiceQuestions(multipleChoiceQuestionsArray);
-        return dummyTriviaDataObject;
-    }
-
-    private MultipleChoiceQuestion createDummyMultipleChoiceQuestion(int id) {
-        String [] incorrectAnswers = new String[4];
-        for (int i = 1 ; i < incorrectAnswers.length + 1 ; i++) {
-            incorrectAnswers[i - 1] = "Incorrect answer " + i;
-        }
-        MultipleChoiceQuestion dummyMultipleChoiceQuestion = new MultipleChoiceQuestion();
-        dummyMultipleChoiceQuestion.setQuestion("Question " + id);
-        dummyMultipleChoiceQuestion.setCategory("Category " + id);
-        dummyMultipleChoiceQuestion.setCorrectAnswer("Correct Answer " + id);
-        dummyMultipleChoiceQuestion.setIncorrectAnswers(incorrectAnswers);
-        dummyMultipleChoiceQuestion.setDifficulty("Difficulty " + id);
-        return dummyMultipleChoiceQuestion;
     }
 }

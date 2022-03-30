@@ -1,19 +1,18 @@
 package com.example.triviaapprk22applicationv2;
 
+import com.example.triviaapprk22applicationv2.model.triviadata.TriviaData;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
 @Repository
 public class TriviaAppRepository {
     private RestTemplate restTemplate;
-    private Class responseType;
 
-    public TriviaAppRepository(RestTemplate restTemplate, Class responseType) {
+    public TriviaAppRepository(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
-        this.responseType = responseType;
     }
 
-    public Object fetch(String uri) {
-        return restTemplate.getForObject(uri, responseType);
+    public TriviaData fetch(String uri) {
+        return restTemplate.getForObject(uri, TriviaData.class);
     }
 }
