@@ -1,7 +1,7 @@
 # TriviaAppRk22ApplicationV2.0
 
 # Trivia application TDD
-For this version, I've used the Test Driven Development approach (test, code, design).
+For this version, I've used the Test Driven Development approach (test, code, design), so make sure to check the tests folder.
 
 You can fork this project and open it in your IDE or other editor. To run the application, run the following command in a terminal window in the root directory:
 ```
