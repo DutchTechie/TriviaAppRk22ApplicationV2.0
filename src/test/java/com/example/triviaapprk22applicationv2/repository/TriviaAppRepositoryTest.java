@@ -1,4 +1,4 @@
-package com.example.triviaapprk22applicationv2;
+package com.example.triviaapprk22applicationv2.repository;
 
 import com.example.triviaapprk22applicationv2.model.triviadata.TriviaData;
 import com.example.triviaapprk22applicationv2.model.triviadata.MultipleChoiceQuestion;

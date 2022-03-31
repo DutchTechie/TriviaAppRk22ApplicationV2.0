@@ -13,7 +13,6 @@ public class TriviaQuizBuilder {
         this.multipleChoiceQuestions = multipleChoiceQuestions;
     }
 
-    // TODO: Add test to check if values are not empty
     public PreparedMultipleChoiceQuestion[] getPreparedMultipleChoiceQuestions() {
         PreparedMultipleChoiceQuestion[] preparedMultipleChoiceQuestions = new PreparedMultipleChoiceQuestion[multipleChoiceQuestions.length];
         for (int i = 0 ; i < preparedMultipleChoiceQuestions.length; i++) {

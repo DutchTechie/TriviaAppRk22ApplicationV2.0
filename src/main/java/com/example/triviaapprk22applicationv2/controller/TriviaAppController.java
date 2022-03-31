@@ -1,7 +1,10 @@
-package com.example.triviaapprk22applicationv2;
+package com.example.triviaapprk22applicationv2.controller;
 
 import com.example.triviaapprk22applicationv2.builder.TriviaQuizBuilder;
 import com.example.triviaapprk22applicationv2.model.triviadata.MultipleChoiceQuestion;
+import com.example.triviaapprk22applicationv2.model.triviadata.PreparedMultipleChoiceQuestion;
+import com.example.triviaapprk22applicationv2.repository.TriviaAppRepository;
+import com.example.triviaapprk22applicationv2.service.TriviaAppService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +27,7 @@ public class TriviaAppController {
         String uri = constructFullPathToApi(OPENTDB_BASE_URI, "amount", String.valueOf(NUMBER_OF_QUESTIONS));
         this.multipleChoiceQuestions = this.service.getQuestions(uri);
         this.builder = new TriviaQuizBuilder(this.multipleChoiceQuestions);
-        for (MultipleChoiceQuestion question : multipleChoiceQuestions) {
+        for (PreparedMultipleChoiceQuestion question : builder.getPreparedMultipleChoiceQuestions()) {
             System.out.println(question.toString());
         }
     }
