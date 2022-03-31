@@ -21,15 +21,22 @@ class TriviaAppRepositoryTest {
 
     @BeforeEach
     void setup() {
-        MultipleChoiceQuestion[] dummyMultipleChoiceQuestions = Stubs.createDummyMultipleChoiceQuestions(AMOUNT_OF_QUESTIONS, NUMBER_OF_INCORRECT_ANSWERS_FOR_EACH_QUESTION);
+        MultipleChoiceQuestion[] dummyMultipleChoiceQuestions = Stubs.createDummyMultipleChoiceQuestions(
+                AMOUNT_OF_QUESTIONS,
+                NUMBER_OF_INCORRECT_ANSWERS_FOR_EACH_QUESTION
+        );
         this.dummyTriviaData = Stubs.createDummyTriviaDataObject(dummyMultipleChoiceQuestions);
         this.template = Mockito.mock(RestTemplate.class);
         this.repositoryUnderTest = new TriviaAppRepository(template);
     }
 
     @Test
-    void testRepositoryFetchesAnObject() {
+    void repositoryShouldFetchTriviaData() {
+        // Arrange
         when(template.getForObject(DUMMY_URI, TriviaData.class)).thenReturn(dummyTriviaData);
-        assertNotNull(repositoryUnderTest.fetch(DUMMY_URI));
+        //Act
+        TriviaData triviaData = repositoryUnderTest.fetch(DUMMY_URI);
+        // Assert
+        assertNotNull(triviaData);
     }
 }

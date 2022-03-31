@@ -13,9 +13,13 @@ public class TriviaQuizBuilder {
         this.multipleChoiceQuestions = multipleChoiceQuestions;
     }
 
+    // TODO: Add test to check if values are not empty
     public PreparedMultipleChoiceQuestion[] getPreparedMultipleChoiceQuestions() {
-        // This class prepares the multiple choice questions for the questions view
-        return null;
+        PreparedMultipleChoiceQuestion[] preparedMultipleChoiceQuestions = new PreparedMultipleChoiceQuestion[multipleChoiceQuestions.length];
+        for (int i = 0 ; i < preparedMultipleChoiceQuestions.length; i++) {
+            preparedMultipleChoiceQuestions[i] = getPreparedMultipleChoiceQuestion(multipleChoiceQuestions[i]);
+        }
+        return preparedMultipleChoiceQuestions;
     }
 
     public PreparedMultipleChoiceQuestion getPreparedMultipleChoiceQuestion(MultipleChoiceQuestion multipleChoiceQuestion) {
@@ -32,12 +36,12 @@ public class TriviaQuizBuilder {
         return preparedMultipleChoiceQuestion;
     }
 
+    // Consider using the getShuffledStringArray as a utility method/class
     private String[] getShuffledStringArray(String[] stringArray) {
         String [] shuffledArrayResult = stringArray;
-
         Random rnd = ThreadLocalRandom.current();
-        for (int i = stringArray.length - 1; i > 0; i--)
-        {
+
+        for (int i = stringArray.length - 1; i > 0; i--) {
             int index = rnd.nextInt(i + 1);
             String str = shuffledArrayResult[index];
             shuffledArrayResult[index] = shuffledArrayResult[i];

@@ -13,7 +13,7 @@ import static org.mockito.Mockito.when;
 
 class TriviaAppServiceTest {
     private TriviaAppService serviceUnderTest;
-    private static final String DUMMY_URI = "www.dummyuri.com";
+    private static final String DUMMY_URI = "www.dummyuri.com"; // Consider adding a class for parsing uri's
     private TriviaAppRepository repository;
     private TriviaData dummyTriviaData;
     private static final int AMOUNT_OF_QUESTIONS = 3;
@@ -28,34 +28,36 @@ class TriviaAppServiceTest {
     }
 
     @Test
-    void testGetTriviaQuestions() {
+    void canReceiveNumberOfQuestions() {
+        // Arrange
         when(repository.fetch(DUMMY_URI)).thenReturn(dummyTriviaData);
+        // Act
         MultipleChoiceQuestion[] questions = serviceUnderTest.getQuestions(DUMMY_URI);
+        // Assert
         assertEquals(questions.length, AMOUNT_OF_QUESTIONS);
     }
 
     @Test
-    void testGetNonExistingTriviaDataByDefault() {
-        String expectedExceptionMessage = "Resource 'TriviaData' not found at:\t" + DUMMY_URI;
-        Exception resourceUnavailableException = assertThrows(ResourceUnavailableException.class, () ->
-                serviceUnderTest.getQuestions(DUMMY_URI));
-        assertEquals(expectedExceptionMessage, resourceUnavailableException.getMessage());
-    }
-
-    @Test
-    void testGetNonExistingTriviaDataWhenNull() {
+    void willThrowWhenGettingTriviaDataResultingInNull() {
+        // Arrange
         when(repository.fetch(DUMMY_URI)).thenReturn(null);
         String expectedExceptionMessage = "Resource 'TriviaData' not found at:\t" + DUMMY_URI;
         Exception resourceUnavailableException = assertThrows(ResourceUnavailableException.class, () ->
+                // Act
                 serviceUnderTest.getQuestions(DUMMY_URI));
+        // Assert
         assertEquals(expectedExceptionMessage, resourceUnavailableException.getMessage());
     }
 
     @Test
-    void testGetEmptyListOfQuestions() {
+    void canGetEmptyListOfQuestions() {
+        // Arrange
+        int expected = 0;
         dummyTriviaData.setMultipleChoiceQuestions(new MultipleChoiceQuestion[0]);
         when(repository.fetch(DUMMY_URI)).thenReturn(dummyTriviaData);
+        // Act
         MultipleChoiceQuestion[] multipleChoiceQuestions = serviceUnderTest.getQuestions(DUMMY_URI);
-        assertEquals(multipleChoiceQuestions.length, 0);
+        // Assert
+        assertEquals(expected, multipleChoiceQuestions.length);
     }
 }
